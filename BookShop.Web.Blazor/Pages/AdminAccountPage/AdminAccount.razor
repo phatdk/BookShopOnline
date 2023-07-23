@@ -1,0 +1,32 @@
+﻿@page "/adminaccount"
+@attribute [Authorize(Roles = "Admin")]
+<h3>AdminAccount</h3>
+<a class="btn" href="/adminaccount/add">Create New</a>
+@if (_admins != null)
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Email</th>
+				<th scope="col">Password</th>
+				<th scope="col">Created Date</th>
+				<th scope="col">Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			@{int index = 0;}
+			@foreach (var item in _admins)
+			{
+				index++;
+				<tr>
+					<th scope="row">@index</th>
+					<td>@item.Id</td>
+					<td>@item.Email</td>
+					<td>@item.CreatedDate.ToString("dd-MM-yyyy")</td>
+					<td>@item.Status</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}

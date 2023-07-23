@@ -1,0 +1,123 @@
+﻿@using BookShop.Web.Blazor.Authentication;
+@inherits LayoutComponentBase
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager navManager
+
+<PageTitle>BookShop.Web.Blazor</PageTitle>
+
+<div class="page">
+	<AuthorizeView Roles="Admin">
+		<div class="sidebar">
+			<NavMenu />
+		</div>
+	</AuthorizeView>
+
+	<main>
+		<div class="top-row px-4">
+			<div class="logo">
+				<img src="image/logo/logo.png" height="50" />
+			</div>
+			<a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+			<AuthorizeView Roles="Admin">
+				<Authorized>
+					<a href="javascript:void(0)">
+						<i class="fa-solid fa-eye"></i><span>View mode</span>
+					</a>
+				</Authorized>
+				<NotAuthorized>
+					<form class="d-flex" role="search">
+						<input class="form-control me-2 bg-transparent" type="search" placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-success" type="submit">Search</button>
+					</form>
+					<div class="header-cart">
+						<ul>
+							<li>
+								<a class="position-relative" href="#giohang">
+									<i class="fas fa-heart fa-lg"></i>
+									<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+										9
+										<span class="visually-hidden">unread messages</span>
+									</span>
+								</a>
+							</li>
+							<li>
+								<a class="position-relative" href="#giohang">
+									<i class="fas fa-basket-shopping fa-lg"></i>
+									<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+										9
+										<span class="visually-hidden">unread messages</span>
+									</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</NotAuthorized>
+			</AuthorizeView>
+			<AuthorizeView Roles="User">
+				<Authorized>
+					<a class="nav-link" href="/information">
+						<i class="fa-solid fa-user"></i><span>Information</span>
+					</a>
+				</Authorized>
+			</AuthorizeView>
+			<AuthorizeView>
+				<Authorized>
+					<a href="javascript:void(0)" @onclick="Logout" class="nav-link text-light btn btn-outline-success">
+						<i class="fa-solid fa-right-from-bracket"></i><span>Logout</span>
+					</a>
+				</Authorized>
+				<NotAuthorized>
+					<a class="nav-link text-light btn btn-outline-success" href="/login">
+						<i class="fa-solid fa-right-to-bracket"></i><span>Login</span>
+					</a>
+				</NotAuthorized>
+			</AuthorizeView>
+		</div>
+
+		<AuthorizeView Roles="Admin">
+			<NotAuthorized>
+				<nav class="navbar navbar-expand-lg bg-body-tertiary position-relative main-menu">
+					<div class="container-fluid">
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="fa fa-bars"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav me-auto mb-2 mb-lg-0 position-absolute top-50 start-50 translate-middle">
+								<li class="nav-item">
+									<a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#1">Giới thiệu</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+										Tủ sách
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+										Tin tức & sự kiện
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#3">Liên hệ</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</NotAuthorized>
+		</AuthorizeView>
+		<article class="content px-4">
+			@Body
+		</article>
+	</main>
+</div>
+@code {
+	private async Task Logout()
+	{
+		var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+		await customAuthStateProvider.UpdateAuthenticationState(null);
+		navManager.NavigateTo("/", true);
+	}
+}
