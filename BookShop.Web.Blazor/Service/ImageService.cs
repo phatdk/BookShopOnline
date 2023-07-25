@@ -23,22 +23,25 @@ namespace BookShop.Web.Blazor.Service
 			return await _httpClient.GetFromJsonAsync<ImageVM>(_url + $"{id}");
 		}
 
-		public async Task<ImageVM?> AddAsync(ImageVM item)
+		public async Task<bool> AddAsync(ImageVM item)
 		{
 			var response = await _httpClient.PostAsJsonAsync(_url + $"add", item);
-			return await response.Content.ReadFromJsonAsync<ImageVM>();
+			if (response != null) return true;
+			return false;
 		}
 
-		public async Task<ImageVM?> UpdateAsync(ImageVM item)
+		public async Task<bool> UpdateAsync(ImageVM item)
 		{
 			var response = await _httpClient.PutAsJsonAsync(_url + $"update/{item.Id}", item);
-			return await response.Content.ReadFromJsonAsync<ImageVM>();
+			if (response != null) return true;
+			return false;
 		}
 
-		public async Task<ImageVM?> AddAsync(Guid id)
+		public async Task<bool> AddAsync(Guid id)
 		{
 			var response = await _httpClient.DeleteAsync(_url + $"delete/{id}");
-			return await response.Content.ReadFromJsonAsync<ImageVM>();
+			if (response != null) return true;
+			return false;
 		}
 	}
 }

@@ -10,6 +10,7 @@ namespace BookShopBLL.ViewModel
 	public class CommentVM
 	{
 		public Guid Id { get; set; }
+		[Required]
 		public string Content { get; set; }
 		public DateTime CreatedDate { get; set; }
 

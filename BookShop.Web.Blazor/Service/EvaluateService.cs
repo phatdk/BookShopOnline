@@ -24,22 +24,25 @@ namespace BookShop.Web.Blazor.Service
 			return await _httpClient.GetFromJsonAsync<EvaluateVM>(_url + $"{id}");
 		}
 
-		public async Task<EvaluateVM?> AddAsync(EvaluateVM EvaluateVM)
+		public async Task<bool> AddAsync(EvaluateVM item)
 		{
-			var response = await _httpClient.PostAsJsonAsync(_url + "add", EvaluateVM);
-			return await response.Content.ReadFromJsonAsync<EvaluateVM>();
+			var response = await _httpClient.PostAsJsonAsync(_url + $"add", item);
+			if (response != null) return true;
+			return false;
 		}
 
-		public async Task<EvaluateVM?> UpdateAsync(EvaluateVM EvaluateVM)
+		public async Task<bool> UpdateAsync(EvaluateVM item)
 		{
-			var response = await _httpClient.PutAsJsonAsync(_url + $"update/{EvaluateVM.Id}", EvaluateVM);
-			return await response.Content.ReadFromJsonAsync<EvaluateVM>();
+			var response = await _httpClient.PutAsJsonAsync(_url + $"update/{item.Id}", item);
+			if (response != null) return true;
+			return false;
 		}
 
-		public async Task<EvaluateVM?> DeleteAsync(Guid id)
+		public async Task<bool> AddAsync(Guid id)
 		{
 			var response = await _httpClient.DeleteAsync(_url + $"delete/{id}");
-			return await response.Content.ReadFromJsonAsync<EvaluateVM>();
+			if (response != null) return true;
+			return false;
 		}
 	}
 }

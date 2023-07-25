@@ -11,7 +11,9 @@ namespace BookShopBLL.ViewModel
 	{
 
 		public Guid Id { get; set; }
+		[Required, MaxLength(100, ErrorMessage = "The path exceeds 100 characters, please change the image name")]
 		public string ImageUrl { get; set; }
+		[Required]
 		public int? Index { get; set; }
 		public DateTime CreatedDate { get; set; }
 

@@ -64,13 +64,21 @@ namespace BookShopBLL.Service
 			return await _context.Admins.ProjectTo<AdminVM>(_mapper.ConfigurationProvider).ToListAsync();
 		}
 
-		public async Task<AdminVM> GetByIdAsync(Guid? Id, string? email, int status)
+		public async Task<AdminVM> GetByIdAsync(Guid? Id, string? email, int? status)
 		{
+			if (status != null)
+			{
+				if (Id != null)
+				{
+					return await _context.Admins.ProjectTo<AdminVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id && c.Status == status);
+				}
+				return await _context.Admins.ProjectTo<AdminVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Email.ToLower().Equals(email.ToLower()) && c.Status == status);
+			}
 			if (Id != null)
 			{
-				return await _context.Admins.ProjectTo<AdminVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id && c.Status == status);
+				return await _context.Admins.ProjectTo<AdminVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
 			}
-			return await _context.Admins.ProjectTo<AdminVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Email.ToLower().Equals(email.ToLower()) && c.Status == status);
+			return await _context.Admins.ProjectTo<AdminVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Email.ToLower().Equals(email.ToLower()));
 		}
 
 		public async Task<bool> UpdateAsync(AdminVM item)

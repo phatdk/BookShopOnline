@@ -10,6 +10,7 @@ namespace BookShopBLL.ViewModel
 	public class ReturnOrderVM
 	{
 		public Guid Id { get; set; }
+		[Required, MaxLength(256)]
 		public string Notes { get; set; }
 		public DateTime CreatedDate { get; set; }
 		public int Status { get; set; }

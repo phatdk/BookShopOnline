@@ -24,29 +24,33 @@ namespace BookShop.Web.Blazor.Service
 			return await _httpClient.GetFromJsonAsync<Order_BookVM>(_url + $"{idorder}/{idbook}");
 		}
 
-		public async Task<Order_BookVM?> AddAsync(List<Order_BookVM> obj)
+		public async Task<bool> AddAsync(List<Order_BookVM> obj)
 		{
 			var response = await _httpClient.PostAsJsonAsync(_url + "add", obj);
-			return await response.Content.ReadFromJsonAsync<Order_BookVM>();
+			if (response != null) return true;
+			return false;
 		}
 
-		public async Task<Order_BookVM?> UpdateAsync(Order_BookVM obj)
+		public async Task<bool> UpdateAsync(Order_BookVM obj)
 		{
 			var response = await _httpClient.PutAsJsonAsync(_url + $"update/{obj.Id_Order}/{obj.Id_Book}", obj);
-			return await response.Content.ReadFromJsonAsync<Order_BookVM>();
+			if(response != null) return true;
+			return false;
 		}
 
-		public async Task<Order_BookVM?> DeleteAsync(Guid idorder, Guid? idbook)
+		public async Task<bool> DeleteAsync(Guid idorder, Guid? idbook)
 		{
 			if (idbook == null)
 			{
 				var response = await _httpClient.DeleteAsync(_url + $"delete" + $"?idorder={idorder}");
-				return await response.Content.ReadFromJsonAsync<Order_BookVM>();
+				if(response != null) return true;
+				return false;
 			}
 			else
 			{
 				var response = await _httpClient.DeleteAsync(_url + "delete" + $"?idorder={idorder}&idbook{idbook}");
-				return await response.Content.ReadFromJsonAsync<Order_BookVM>();
+				if(response != null) return true;
+				return false;
 			}
 		}
 	}

@@ -27,22 +27,25 @@ namespace BookShop.Web.Blazor.Service
 			return await _httpClient.GetFromJsonAsync<Payment_FormVM>(_url + $"{id}");
 		}
 
-		public async Task<Payment_FormVM?> AddAsync(Payment_FormVM item)
+		public async Task<bool> AddAsync(Payment_FormVM item)
 		{
 			var response = await _httpClient.PostAsJsonAsync(_url + $"add", item);
-			return await response.Content.ReadFromJsonAsync<Payment_FormVM>();
+			if (response != null) return true;
+			return false;
 		}
 
-		public async Task<Payment_FormVM?> UpdateAsync(Payment_FormVM item)
+		public async Task<bool> UpdateAsync(Payment_FormVM item)
 		{
 			var response = await _httpClient.PutAsJsonAsync(_url + $"update/{item.Id}", item);
-			return await response.Content.ReadFromJsonAsync<Payment_FormVM>();
+			if (response != null) return true;
+			return false;
 		}
 
-		public async Task<Payment_FormVM?> AddAsync(Guid id)
+		public async Task<bool> AddAsync(Guid id)
 		{
 			var response = await _httpClient.DeleteAsync(_url + $"delete/{id}");
-			return await response.Content.ReadFromJsonAsync<Payment_FormVM>();
+			if (response != null) return true;
+			return false;
 		}
 	}
 }

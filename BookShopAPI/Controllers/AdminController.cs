@@ -33,7 +33,7 @@ namespace BookShopAPI.Controllers
 
 		// GET api/<AdminController>/5
 		[HttpGet("get")]
-		public async Task<IActionResult> GetByIdAsync(Guid? id, string? address, int s)
+		public async Task<IActionResult> GetByIdAsync(Guid? id, string? address, int? s)
 		{
 			var obj = await _service.GetByIdAsync(id, address, s);
 			if (obj != null)

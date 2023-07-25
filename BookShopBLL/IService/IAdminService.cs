@@ -12,7 +12,7 @@ namespace BookShopBLL.IService
 	{
 		public Task<List<AdminVM>> GetAsync();
 		public Task<List<AdminVM>> GetActiveAsync();
-		public Task<AdminVM> GetByIdAsync(Guid? Id, string? email, int status);
+		public Task<AdminVM> GetByIdAsync(Guid? Id, string? email, int? status);
 		public Task<bool> AddAsync(AdminVM item);
 		public Task<bool> UpdateAsync(AdminVM item);
 		public Task<bool> DeleteAsync(Guid Id);

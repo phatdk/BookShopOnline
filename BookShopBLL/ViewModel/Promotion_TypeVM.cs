@@ -10,6 +10,7 @@ namespace BookShopBLL.ViewModel
 	public class Promotion_TypeVM
 	{
 		public Guid Id { get; set; }
+		[Required]
 		public string Name { get; set; }
 		public DateTime CreatedDate { get; set; }
 		public int Status { get; set; }

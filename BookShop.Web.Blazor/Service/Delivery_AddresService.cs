@@ -29,22 +29,25 @@ namespace BookShop.Web.Blazor.Service
 			return await _httpClient.GetFromJsonAsync<Delivery_AddressVM>(_url + $"{id}");
 		}
 
-		public async Task<Delivery_AddressVM?> AddAsync(Delivery_AddressVM Delivery_AddressVM)
+		public async Task<bool> AddAsync(Delivery_AddressVM item)
 		{
-			var response = await _httpClient.PostAsJsonAsync(_url + "add", Delivery_AddressVM);
-			return await response.Content.ReadFromJsonAsync<Delivery_AddressVM>();
+			var response = await _httpClient.PostAsJsonAsync(_url + $"add", item);
+			if (response != null) return true;
+			return false;
 		}
 
-		public async Task<Delivery_AddressVM?> UpdateAsync(Delivery_AddressVM Delivery_AddressVM)
+		public async Task<bool> UpdateAsync(Delivery_AddressVM item)
 		{
-			var response = await _httpClient.PutAsJsonAsync(_url + $"update/{Delivery_AddressVM.Id}", Delivery_AddressVM);
-			return await response.Content.ReadFromJsonAsync<Delivery_AddressVM>();
+			var response = await _httpClient.PutAsJsonAsync(_url + $"update/{item.Id}", item);
+			if (response != null) return true;
+			return false;
 		}
 
-		public async Task<Delivery_AddressVM?> DeleteAsync(Guid id)
+		public async Task<bool> AddAsync(Guid id)
 		{
 			var response = await _httpClient.DeleteAsync(_url + $"delete/{id}");
-			return await response.Content.ReadFromJsonAsync<Delivery_AddressVM>();
+			if (response != null) return true;
+			return false;
 		}
 	}
 }

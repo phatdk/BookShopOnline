@@ -43,22 +43,25 @@ namespace BookShop.Web.Blazor.Service
 			return await _httpClient.GetFromJsonAsync<Customer_PromotionVM>(_url + $"{idcustomer}/{idpromotion}");
 		}
 
-		public async Task<Customer_PromotionVM?> AddAsync(List<Customer_PromotionVM> item)
+		public async Task<bool> AddAsync(List<Customer_PromotionVM> item)
 		{
 			var response = await _httpClient.PostAsJsonAsync(_url + "add", item);
-			return await response.Content.ReadFromJsonAsync<Customer_PromotionVM>();
+			if (response != null) return true;
+			return false;
 		}
 
-		public async Task<Customer_PromotionVM?> UpdateAsync(Customer_PromotionVM item)
+		public async Task<bool> UpdateAsync(Customer_PromotionVM item)
 		{
 			var response = await _httpClient.PutAsJsonAsync(_url + $"update/{item.Id_Customer}/{item.Id_Promotion}", item);
-			return await response.Content.ReadFromJsonAsync<Customer_PromotionVM>();
+			if(response != null) return true;
+			return false;
 		}
 
-		public async Task<Customer_PromotionVM?> DeleteAsync(Guid idcustomer, Guid idpromotion)
+		public async Task<bool> DeleteAsync(Guid idcustomer, Guid idpromotion)
 		{
 			var response = await _httpClient.DeleteAsync(_url + "delete" + $"?idcustomer={idcustomer}&idpromotion={idpromotion}");
-			return await response.Content.ReadFromJsonAsync<Customer_PromotionVM>();
+			if(response != null) return true;
+			return false;
 		}
 	}
 }

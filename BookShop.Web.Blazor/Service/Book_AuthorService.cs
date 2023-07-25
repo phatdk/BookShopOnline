@@ -24,29 +24,33 @@ namespace BookShop.Web.Blazor.Service
 			return await _httpClient.GetFromJsonAsync<Book_AuthorVM>(_url + $"{idbook}/{idauthor}");
 		}
 
-		public async Task<Book_AuthorVM?> AddAsync(List<Book_AuthorVM> obj)
+		public async Task<bool> AddAsync(List<Book_AuthorVM> obj)
 		{
 			var response = await _httpClient.PostAsJsonAsync(_url + "add", obj);
-			return await response.Content.ReadFromJsonAsync<Book_AuthorVM>();
+			if (response != null) return true;
+			return false;
 		}
 
-		public async Task<Book_AuthorVM?> UpdateAsync(Book_AuthorVM obj)
+		public async Task<bool> UpdateAsync(Book_AuthorVM obj)
 		{
 			var response = await _httpClient.PutAsJsonAsync(_url + $"update/{obj.Id_Book}/{obj.Id_Author}", obj);
-			return await response.Content.ReadFromJsonAsync<Book_AuthorVM>();
+			if(response != null) return true;
+			return false;
 		}
 
-		public async Task<Book_AuthorVM?> DeleteAsync(Guid idbook, Guid? idauthor)
+		public async Task<bool> DeleteAsync(Guid idbook, Guid? idauthor)
 		{
 			if (idauthor == null)
 			{
 				var response = await _httpClient.DeleteAsync(_url + $"delete" + $"?idbook={idbook}");
-				return await response.Content.ReadFromJsonAsync<Book_AuthorVM>();
+				if(response != null) return true;
+				return false;
 			}
 			else
 			{
 				var response = await _httpClient.DeleteAsync(_url + "delete" + $"?idbook={idbook}&idauthor{idauthor}");
-				return await response.Content.ReadFromJsonAsync<Book_AuthorVM>();
+				if(response != null) return true;
+				return false;
 			}
 		}
 

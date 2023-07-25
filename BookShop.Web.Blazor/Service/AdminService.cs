@@ -11,16 +11,18 @@ namespace BookShop.Web.Blazor.Service
 			_httpClient = httpClient;
 			_url = new Uri("https://localhost:7033/api/Admin/");
 		}
-		public async Task<AdminVM?> AddAsync(AdminVM item)
+		public async Task<bool> AddAsync(AdminVM item)
 		{
 			var response = await _httpClient.PostAsJsonAsync(_url + "add", item);
-			return await response.Content.ReadFromJsonAsync<AdminVM>();
+			if (response != null) return true;
+			return false;
 		}
 
-		public async Task<AdminVM?> DeleteAsync(Guid Id)
+		public async Task<bool> DeleteAsync(Guid Id)
 		{
 			var response = await _httpClient.DeleteAsync(_url + $"delete/{Id}");
-			return await response.Content.ReadFromJsonAsync<AdminVM>();
+			if (response != null) return true;
+			return false;
 		}
 
 		public async Task<List<AdminVM>?> GetActiveAsync()
@@ -33,16 +35,18 @@ namespace BookShop.Web.Blazor.Service
 			return await _httpClient.GetFromJsonAsync<List<AdminVM>>(_url + "all");
 		}
 
-		public async Task<AdminVM?> GetByIdAsync(Guid? Id, string? address, int s)
+		public async Task<AdminVM?> GetByIdAsync(Guid? Id, string? address, int? s)
 		{
-			if(Id == null) return await _httpClient.GetFromJsonAsync<AdminVM>(_url + "get" + $"?Id={Id}&s={s}");
-			return await _httpClient.GetFromJsonAsync<AdminVM>(_url + "get" + $"?address={address}&s={s}");
+			if(Id != null) return await _httpClient.GetFromJsonAsync<AdminVM>(_url + "get" + $"?id={Id}&s={s}");
+			var result = await _httpClient.GetFromJsonAsync<AdminVM>(_url + "get" + $"?address={address}&s={s}");
+			return result;
 		}
 
-		public async Task<AdminVM?> UpdateAsync(AdminVM item)
+		public async Task<bool> UpdateAsync(AdminVM item)
 		{
 			var response = await _httpClient.PutAsJsonAsync(_url + $"update/{item.Id}", item);
-			return await response.Content.ReadFromJsonAsync<AdminVM>();
+			if(response != null) return true;
+			return false;
 		}
 	}
 }

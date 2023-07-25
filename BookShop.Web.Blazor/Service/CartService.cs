@@ -24,22 +24,25 @@ namespace BookShop.Web.Blazor.Service
 			return await _httpClient.GetFromJsonAsync<CartVM>(_url + $"{idcustomer}/{idbook}");
 		}
 
-		public async Task<CartVM?> AddAsync(CartVM cartVM)
+		public async Task<bool> AddAsync(CartVM cartVM)
 		{
 			var response = await _httpClient.PostAsJsonAsync(_url + "add", cartVM);
-			return await response.Content.ReadFromJsonAsync<CartVM>();
+			if (response != null) return true;
+			return false;
 		}
 		
-		public async Task<CartVM?> UpdateAsync(CartVM cartVM)
+		public async Task<bool> UpdateAsync(CartVM cartVM)
 		{
 			var response = await _httpClient.PutAsJsonAsync(_url + $"update/{cartVM.Id_Customer}/{cartVM.Id_Book}", cartVM);
-			return await response.Content.ReadFromJsonAsync<CartVM>();
+			if(response != null) return true;
+			return false;
 		}
 		
-		public async Task<CartVM?> DeleteAsync(Guid? idcustomer, Guid? idbook)
+		public async Task<bool> DeleteAsync(Guid? idcustomer, Guid? idbook)
 		{
 			var response = await _httpClient.DeleteAsync(_url + $"delete/{idcustomer}/{idbook}");
-			return await response.Content.ReadFromJsonAsync<CartVM>();
+			if(response != null) return true;
+			return false;
 		}
 
 	}

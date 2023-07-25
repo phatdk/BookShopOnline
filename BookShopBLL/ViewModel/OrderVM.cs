@@ -11,7 +11,9 @@ namespace BookShopBLL.ViewModel
 	{
 		public Guid Id { get; set; }
 		public string Code { get; set; }
+		[Required, MaxLength(50)]
 		public string Receiver { get; set; }
+		[Required, MaxLength(13)]
 		public string Phones { get; set; }
 		public DateTime CreatedDate { get; set; }
 		public DateTime? AcceptDate { get; set; }
