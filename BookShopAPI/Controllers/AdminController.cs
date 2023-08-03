@@ -47,7 +47,7 @@ namespace BookShopAPI.Controllers
 		[HttpPost("add")]
 		public async Task<IActionResult> AddAsync([FromBody] AdminVM requuest)
 		{
-			if(requuest == null)
+			if (requuest == null)
 			{
 				return BadRequest();
 			}
@@ -59,7 +59,7 @@ namespace BookShopAPI.Controllers
 		[HttpPut("update/{id}")]
 		public async Task<IActionResult> UpdateAsync([FromBody] AdminVM request)
 		{
-			if(request == null)
+			if (request == null)
 			{
 				return BadRequest();
 			}
@@ -71,12 +71,12 @@ namespace BookShopAPI.Controllers
 		[HttpDelete("delete/{id}")]
 		public async Task<IActionResult> DeleteAsync(Guid id)
 		{
-			var obj =await _service.GetByIdAsync(id, null, 1);
-			if(obj == null)
+			var obj = await _service.GetByIdAsync(id, null, null);
+			if (obj == null)
 			{
 				return NotFound();
 			}
-			var result = _service.DeleteAsync(id);
+			var result = await _service.DeleteAsync(id);
 			return Ok(result);
 		}
 	}

@@ -42,7 +42,6 @@ namespace BookShopDAL.Entity
 		public Guid? Id_Collection { get; set; }
 		public virtual Publisher publisher { get; set; }
 		public virtual Genre genre { get; set; }
-		public virtual Brand? brand { get; set; }
 		public virtual Collection_Book? collection_Book { get; set; }
 
 		// reference

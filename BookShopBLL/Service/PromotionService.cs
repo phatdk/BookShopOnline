@@ -82,11 +82,15 @@ namespace BookShopBLL.Service
 
 		public  async Task<PromotionVM> GetByIdAsync(Guid? Id, string? code)
 		{
-			if (Id != null)
+			try
 			{
-				return await _context.Promotions.ProjectTo<PromotionVM>(_mapper.ConfigurationProvider).FirstAsync(c=>c.Id == Id);
+				if (Id != null)
+				{
+					return await _context.Promotions.ProjectTo<PromotionVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+				}
+				return await _context.Promotions.ProjectTo<PromotionVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Code == code);
 			}
-			return await _context.Promotions.ProjectTo<PromotionVM>(_mapper.ConfigurationProvider).FirstAsync(c=>c.Code == code);
+			catch { return null; }
 		}
 
 		public  async Task<bool> UpdateAsync(PromotionVM item)

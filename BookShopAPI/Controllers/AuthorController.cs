@@ -49,7 +49,7 @@ namespace BookShopAPI.Controllers
 			{
 				return BadRequest();
 			}
-			var result = _service.AddAsync(requuest);
+			var result = await _service.AddAsync(requuest);
 			return Ok(result);
 		}
 
@@ -61,7 +61,7 @@ namespace BookShopAPI.Controllers
 			{
 				return BadRequest();
 			}
-			var result = _service.UpdateAsync(request);
+			var result = await _service.UpdateAsync(request);
 			return Ok(result);
 		}
 
@@ -74,7 +74,7 @@ namespace BookShopAPI.Controllers
 			{
 				return NotFound();
 			}
-			var result = _service.DeleteAsync(id);
+			var result = await _service.DeleteAsync(id);
 			return Ok(result);
 		}
 	}

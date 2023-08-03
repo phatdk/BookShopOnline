@@ -101,7 +101,10 @@ namespace BookShopBLL.Service
 
 		public async Task<Book_PromotionVM> GetByIdAsync(Guid? IdBook, Guid? IdPromotion)
 		{
-			return await _context.Book_Promotions.ProjectTo<Book_PromotionVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id_Book == IdBook && c.Id_Promotion == IdPromotion);
+			try
+			{
+				return await _context.Book_Promotions.ProjectTo<Book_PromotionVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id_Book == IdBook && c.Id_Promotion == IdPromotion);
+			}catch (Exception ex) { return null; }
 		}
 
 		public async Task<bool> UpdateAsync(Book_PromotionVM item)

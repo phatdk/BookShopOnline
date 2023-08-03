@@ -18,9 +18,6 @@ namespace BookShopDAL.Configuration
 
 			builder.Property(c => c.Name).HasColumnType("nvarchar(50)");
 			builder.Property(c => c.Index).IsRequired(false);
-			builder.Property(c => c.Gender).IsRequired(false);
-			builder.Property(c => c.Birth).HasColumnType("varchar(13)").IsRequired(false);
-			builder.Property(c => c.Address).HasColumnType("nvarchar(100)").IsRequired(false);
 		}
 	}
 }

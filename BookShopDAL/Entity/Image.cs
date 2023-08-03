@@ -15,7 +15,5 @@ namespace BookShopDAL.Entity
 		public Guid Id_Parents  { get; set;}
 		public virtual Shop shop { get; set; }
 		public virtual Book book { get; set; }
-		public virtual Publisher publisher { get; set; }
-		public virtual Author author { get; set; }
 	}
 }

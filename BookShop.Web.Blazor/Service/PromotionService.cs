@@ -14,13 +14,13 @@ namespace BookShop.Web.Blazor.Service
 
 		public async Task<List<PromotionVM>?> GetAsync(Guid? idtype)
 		{
-			if (idtype == null) return await _httpClient.GetFromJsonAsync<List<PromotionVM>>(_url + $"all");
+			if (idtype == null) return await _httpClient.GetFromJsonAsync<List<PromotionVM>>(_url + "all");
 			return await _httpClient.GetFromJsonAsync<List<PromotionVM>>(_url + $"all?idtype={idtype}");
 		}
 
 		public async Task<List<PromotionVM>?> GetActiveAsync(Guid? idtype)
 		{
-			if (idtype == null) return await _httpClient.GetFromJsonAsync<List<PromotionVM>>(_url + $"active");
+			if (idtype == null) return await _httpClient.GetFromJsonAsync<List<PromotionVM>>(_url + "active");
 			return await _httpClient.GetFromJsonAsync<List<PromotionVM>>(_url + $"active?idtype={idtype}");
 		}
 
@@ -32,7 +32,7 @@ namespace BookShop.Web.Blazor.Service
 
 		public async Task<bool> AddAsync(PromotionVM item)
 		{
-			var response = await _httpClient.PostAsJsonAsync(_url + $"add", item);
+			var response = await _httpClient.PostAsJsonAsync(_url + "add", item);
 			if (response != null) return true;
 			return false;
 		}

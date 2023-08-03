@@ -16,7 +16,6 @@ builder.Services.AddTransient<IAuthorService, AuthorService>();
 builder.Services.AddTransient<IBook_AuthorService, Book_AuthorService>();
 builder.Services.AddTransient<IBook_PromotionService, Book_PromotionService>();
 builder.Services.AddTransient<IBookService, BookService>();
-builder.Services.AddTransient<IBrandService, BrandService>();
 builder.Services.AddTransient<ICartService, CartService>();
 builder.Services.AddTransient<ICollection_BookService, Collection_BookServive>();
 builder.Services.AddTransient<ICommentService, CommentService>();

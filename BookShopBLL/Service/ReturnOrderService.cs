@@ -64,7 +64,10 @@ namespace BookShopBLL.Service
 
 		public async Task<ReturnOrderVM> GetByIdAsync(Guid Id)
 		{
-			return await _context.ReturnOrders.ProjectTo<ReturnOrderVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			try
+			{
+				return await _context.ReturnOrders.ProjectTo<ReturnOrderVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			}catch(Exception e) { return null; }
 		}
 
 		public async Task<bool> UpdateAsync(ReturnOrderVM item)

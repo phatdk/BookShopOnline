@@ -81,7 +81,10 @@ namespace BookShopBLL.Service
 
 		public async Task<Book_AuthorVM> GetByIdAsync(Guid IdBook, Guid? IdAuthor)
 		{
-			return await _context.Book_Authors.ProjectTo<Book_AuthorVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id_Book == IdBook && c.Id_Author == IdAuthor);
+			try
+			{
+				return await _context.Book_Authors.ProjectTo<Book_AuthorVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id_Book == IdBook && c.Id_Author == IdAuthor);
+			}catch (Exception ex) { return null; }
 		}
 
 		public async Task<bool> UpdateAsync(Book_AuthorVM item)

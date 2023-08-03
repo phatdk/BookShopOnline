@@ -26,7 +26,6 @@ namespace BookShopDAL.Configuration
 
 			builder.HasOne<Publisher>(c => c.publisher).WithMany(c => c.books).HasForeignKey(c => c.Id_Publisher).OnDelete(DeleteBehavior.Restrict);
 			builder.HasOne<Genre>(c => c.genre).WithMany(c => c.books).HasForeignKey(c => c.Id_Genre).OnDelete(DeleteBehavior.Restrict);
-			builder.HasOne<Brand>(c=>c.brand).WithMany(c=>c.books).HasForeignKey(c=>c.Id_Brand).OnDelete(DeleteBehavior.Restrict).IsRequired(false);
 			builder.HasOne<Collection_Book>(c=>c.collection_Book).WithMany(c=>c.books).HasForeignKey(c=>c.Id_Collection).OnDelete(DeleteBehavior.Restrict).IsRequired(false);
 		}
 	}

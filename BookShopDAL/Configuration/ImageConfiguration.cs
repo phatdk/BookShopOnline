@@ -21,8 +21,6 @@ namespace BookShopDAL.Configuration
 
 			builder.HasOne<Shop>(c=>c.shop).WithMany(c=>c.images).HasForeignKey(c=>c.Id_Parents).OnDelete(DeleteBehavior.NoAction);
 			builder.HasOne<Book>(c=>c.book).WithMany(c=>c.images).HasForeignKey(c=>c.Id_Parents).OnDelete(DeleteBehavior.NoAction);
-			builder.HasOne<Publisher>(c=>c.publisher).WithMany(c=>c.images).HasForeignKey(c=>c.Id_Parents).OnDelete(DeleteBehavior.NoAction);
-			builder.HasOne<Author>(c=>c.author).WithMany(c=>c.images).HasForeignKey(c=>c.Id_Parents).OnDelete(DeleteBehavior.NoAction);
 		}
 	}
 }

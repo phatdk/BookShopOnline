@@ -73,7 +73,10 @@ namespace BookShopBLL.Service
 
 		public async Task<CommentVM> GetByIdAsync(Guid Id)
 		{
-			return await _context.Comments.ProjectTo<CommentVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			try
+			{
+				return await _context.Comments.ProjectTo<CommentVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			}catch (Exception ex) { return null; }
 		}
 
 		public async Task<bool> UpdateAsync(CommentVM item)

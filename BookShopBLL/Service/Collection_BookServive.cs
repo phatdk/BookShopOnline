@@ -72,7 +72,11 @@ namespace BookShopBLL.Service
 
 		public async Task<Collection_BookVM> GetByIdAsync(Guid Id)
 		{
-			return await _context.Collection_Books.ProjectTo<Collection_BookVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			try
+			{
+				return await _context.Collection_Books.ProjectTo<Collection_BookVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			}
+			catch { return null; }
 		}
 
 		public async Task<bool> UpdateAsync(Collection_BookVM item)

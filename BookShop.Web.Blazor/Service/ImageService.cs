@@ -14,7 +14,7 @@ namespace BookShop.Web.Blazor.Service
 
 		public async Task<List<ImageVM>?> GetAsync(Guid? idparents)
 		{
-			if (idparents == null) return await _httpClient.GetFromJsonAsync<List<ImageVM>>(_url + $"all");
+			if (idparents == null) return await _httpClient.GetFromJsonAsync<List<ImageVM>>(_url + "all");
 			return await _httpClient.GetFromJsonAsync<List<ImageVM>>(_url + $"all?idparents={idparents}");
 		}
 
@@ -25,7 +25,7 @@ namespace BookShop.Web.Blazor.Service
 
 		public async Task<bool> AddAsync(ImageVM item)
 		{
-			var response = await _httpClient.PostAsJsonAsync(_url + $"add", item);
+			var response = await _httpClient.PostAsJsonAsync(_url + "add", item);
 			if (response != null) return true;
 			return false;
 		}

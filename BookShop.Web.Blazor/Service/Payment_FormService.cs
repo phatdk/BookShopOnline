@@ -14,12 +14,12 @@ namespace BookShop.Web.Blazor.Service
 
 		public async Task<List<Payment_FormVM>?> GetAsync()
 		{
-			return await _httpClient.GetFromJsonAsync<List<Payment_FormVM>>(_url + $"all");
+			return await _httpClient.GetFromJsonAsync<List<Payment_FormVM>>(_url + "all");
 		}
 
 		public async Task<List<Payment_FormVM>?> GetActiveAsync()
 		{
-			return await _httpClient.GetFromJsonAsync<List<Payment_FormVM>>(_url + $"active");
+			return await _httpClient.GetFromJsonAsync<List<Payment_FormVM>>(_url + "active");
 		}
 
 		public async Task<Payment_FormVM?> GetByIdAsync(Guid id)
@@ -29,7 +29,7 @@ namespace BookShop.Web.Blazor.Service
 
 		public async Task<bool> AddAsync(Payment_FormVM item)
 		{
-			var response = await _httpClient.PostAsJsonAsync(_url + $"add", item);
+			var response = await _httpClient.PostAsJsonAsync(_url + "add", item);
 			if (response != null) return true;
 			return false;
 		}

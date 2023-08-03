@@ -32,7 +32,6 @@ namespace BookShopBLL.Service
 					Id = item.Id,
 					Name = item.Name,
 					Index = item.Index,
-					Description = item.Description,
 					CreatedDate = DateTime.Now,
 					Status = 1,
 				};
@@ -57,11 +56,14 @@ namespace BookShopBLL.Service
 
 		public async Task<List<PublisherVM>> GetActiveAsync(string? name)
 		{
-			if (name != null)
+			try
 			{
-				return await _context.Publishers.ProjectTo<PublisherVM>(_mapper.ConfigurationProvider).Where(c => c.Status == 1 && c.Name.ToLower().Contains(name.ToLower())).ToListAsync();
-			}
-			return await _context.Publishers.ProjectTo<PublisherVM>(_mapper.ConfigurationProvider).Where(c => c.Status == 1).ToListAsync();
+				if (name != null)
+				{
+					return await _context.Publishers.ProjectTo<PublisherVM>(_mapper.ConfigurationProvider).Where(c => c.Status == 1 && c.Name.ToLower().Contains(name.ToLower())).ToListAsync();
+				}
+				return await _context.Publishers.ProjectTo<PublisherVM>(_mapper.ConfigurationProvider).Where(c => c.Status == 1).ToListAsync();
+			}catch(Exception e) { return null; }
 		}
 
 		public async Task<List<PublisherVM>> GetAsync(string? name)
@@ -85,7 +87,6 @@ namespace BookShopBLL.Service
 				var obj = await _context.Publishers.FindAsync(item.Id);
 				obj.Name = item.Name;
 				obj.Index = item.Index;
-				obj.Description = item.Description;
 				obj.Status = item.Status;
 
 				await Task.FromResult<Publisher>(_context.Publishers.Update(obj).Entity);

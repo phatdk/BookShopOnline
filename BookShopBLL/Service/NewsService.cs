@@ -61,7 +61,11 @@ namespace BookShopBLL.Service
 
 		public async Task<NewsVM> GetByIdAsync(Guid Id)
 		{
-			return await _context.News.ProjectTo<NewsVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			try
+			{
+				return await _context.News.ProjectTo<NewsVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			}
+			catch { return null; }
 		}
 
 		public async Task<bool> UpdateAsync(NewsVM item)

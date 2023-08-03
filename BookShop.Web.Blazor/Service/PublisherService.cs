@@ -14,13 +14,13 @@ namespace BookShop.Web.Blazor.Service
 
 		public async Task<List<PublisherVM>?> GetAsync(string? name)
 		{
-			if (name == null) return await _httpClient.GetFromJsonAsync<List<PublisherVM>>(_url + $"all");
+			if (name == null) return await _httpClient.GetFromJsonAsync<List<PublisherVM>>(_url + "all");
 			return await _httpClient.GetFromJsonAsync<List<PublisherVM>>(_url + $"all?name={name}");
 		}
 
 		public async Task<List<PublisherVM>?> GetActiveAsync(string? name)
 		{
-			if (name == null) return await _httpClient.GetFromJsonAsync<List<PublisherVM>>(_url + $"active");
+			if (name == null) return await _httpClient.GetFromJsonAsync<List<PublisherVM>>(_url + "active");
 			return await _httpClient.GetFromJsonAsync<List<PublisherVM>>(_url + $"active?name={name}");
 		}
 
@@ -31,7 +31,7 @@ namespace BookShop.Web.Blazor.Service
 
 		public async Task<bool> AddAsync(PublisherVM item)
 		{
-			var response = await _httpClient.PostAsJsonAsync(_url + $"add", item);
+			var response = await _httpClient.PostAsJsonAsync(_url + "add", item);
 			if (response != null) return true;
 			return false;
 		}

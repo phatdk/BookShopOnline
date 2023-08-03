@@ -70,7 +70,11 @@ namespace BookShopBLL.Service
 
 		public  async Task<Delivery_AddressVM> GetByIdAsync(Guid Id)
 		{
-			return await _context.Delivery_Addresses.ProjectTo<Delivery_AddressVM>(_mapper.ConfigurationProvider).FirstAsync(c=>c.Id == Id);
+			try
+			{
+				return await _context.Delivery_Addresses.ProjectTo<Delivery_AddressVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			}
+			catch { return null; }
 		}
 
 		public  async Task<bool> UpdateAsync(Delivery_AddressVM item)

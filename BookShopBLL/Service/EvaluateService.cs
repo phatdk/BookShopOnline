@@ -70,7 +70,11 @@ namespace BookShopBLL.Service
 
 		public async Task<EvaluateVM> GetByIdAsync(Guid Id)
 		{
-			return await _context.Evaluates.ProjectTo<EvaluateVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			try
+			{
+				return await _context.Evaluates.ProjectTo<EvaluateVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			}
+			catch { return null; }
 		}
 
 		public async Task<bool> UpdateAsync(EvaluateVM item)

@@ -1,5 +1,7 @@
 ﻿using BookShopDAL.Configuration;
 using BookShopDAL.Entity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BookShopDAL.ApplicationDBContext
 {
-	public class BookShopDBContext : DbContext
+	public class BookShopDBContext : DbContext /*IdentityDbContext<IdentityUser>*/
 	{
 		public BookShopDBContext() { }
 		public BookShopDBContext(DbContextOptions options) : base(options) { }
@@ -26,7 +28,6 @@ namespace BookShopDAL.ApplicationDBContext
 		public virtual DbSet<Customer> Customers { get; set; }
 		public virtual DbSet<Customer_Promotion> Customer_Promotions { get; set; }
 		public virtual DbSet<Delivery_Address> Delivery_Addresses { get; set; }
-		public virtual DbSet<Brand> Brands { get; set; }
 		public virtual DbSet<Evaluate> Evaluates { get; set; }
 		public virtual DbSet<Genre> Genres { get; set; }
 		public virtual DbSet<Image> Images { get; set; }
@@ -51,31 +52,6 @@ namespace BookShopDAL.ApplicationDBContext
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-			//modelBuilder.ApplyConfiguration(new AdminConfiguration());
-			//modelBuilder.ApplyConfiguration(new AuthorConfiguration());
-			//modelBuilder.ApplyConfiguration(new Book_AuthorConfiguration());
-			//modelBuilder.ApplyConfiguration(new Book_PromotionConfiguration());
-			//modelBuilder.ApplyConfiguration(new BookConfiguration());
-			//modelBuilder.ApplyConfiguration(new CartConfiguration());
-			//modelBuilder.ApplyConfiguration(new Collection_BookConfiguration());
-			//modelBuilder.ApplyConfiguration(new CommentConfiguration());
-			//modelBuilder.ApplyConfiguration(new CustomerConfiguration());
-			//modelBuilder.ApplyConfiguration(new Customer_PromotionConfiguration());
-			//modelBuilder.ApplyConfiguration(new Delivery_AddressConfiguration());
-			//modelBuilder.ApplyConfiguration(new EvaluateConfiguration());
-			//modelBuilder.ApplyConfiguration(new GenreConfiguration());
-			//modelBuilder.ApplyConfiguration(new ImageConfiguration());
-			//modelBuilder.ApplyConfiguration(new NewsConfiguration());
-			//modelBuilder.ApplyConfiguration(new Order_BookConfiguration());
-			//modelBuilder.ApplyConfiguration(new Order_PromotionConfiguration());
-			//modelBuilder.ApplyConfiguration(new OrderConfiguration());
-			//modelBuilder.ApplyConfiguration(new Payment_FormConfiguration());
-			//modelBuilder.ApplyConfiguration(new Promotion_TypeConfiguration());
-			//modelBuilder.ApplyConfiguration(new PromotionConfiguration());
-			//modelBuilder.ApplyConfiguration(new PublisherConfiguration());
-			//modelBuilder.ApplyConfiguration(new ReturnOrderConfiguration());
-			//modelBuilder.ApplyConfiguration(new ShopConfiguration());
-			//modelBuilder.ApplyConfiguration(new WishListConfiguration());
 		}
 	}
 }

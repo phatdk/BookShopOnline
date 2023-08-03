@@ -64,7 +64,11 @@ namespace BookShopBLL.Service
 
 		public async Task<Payment_FormVM> GetByIdAsync(Guid Id)
 		{
-			return await _context.Payment_Forms.ProjectTo<Payment_FormVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			try
+			{
+				return await _context.Payment_Forms.ProjectTo<Payment_FormVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			}
+			catch { return null; }
 		}
 
 		public async Task<bool> UpdateAsync(Payment_FormVM item)

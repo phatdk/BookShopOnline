@@ -65,7 +65,11 @@ namespace BookShopBLL.Service
 
 		public async Task<WishListVM> GetByIdAsync(Guid IdCustomer, Guid IdBook)
 		{
-			return await _context.WishLists.ProjectTo<WishListVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id_Customer == IdCustomer && c.Id_Book == IdBook);
+			try
+			{
+				return await _context.WishLists.ProjectTo<WishListVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id_Customer == IdCustomer && c.Id_Book == IdBook);
+			}
+			catch (Exception ex) { return null; }
 		}
 
 		public async Task<bool> UpdateAsync(WishListVM item)

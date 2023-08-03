@@ -26,7 +26,7 @@ namespace BookShop.Web.Blazor.Service
 
 		public async Task<bool> AddAsync(EvaluateVM item)
 		{
-			var response = await _httpClient.PostAsJsonAsync(_url + $"add", item);
+			var response = await _httpClient.PostAsJsonAsync(_url + "add", item);
 			if (response != null) return true;
 			return false;
 		}

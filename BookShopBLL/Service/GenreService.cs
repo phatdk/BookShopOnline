@@ -21,7 +21,7 @@ namespace BookShopBLL.Service
 		public GenreService(IMapper mapper)
 		{
 			_context = new BookShopDBContext();
-			_mapper = mapper;
+			_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
 		}
 		public async Task<bool> AddAsync(GenreVM item)
 		{
@@ -75,7 +75,11 @@ namespace BookShopBLL.Service
 
 		public async Task<GenreVM> GetByIdAsync(Guid Id)
 		{
-			return await _context.Genres.ProjectTo<GenreVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			try
+			{
+				return await _context.Genres.ProjectTo<GenreVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			}
+			catch { return null; }
 		}
 
 		public async Task<bool> UpdateAsync(GenreVM item)

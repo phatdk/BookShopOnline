@@ -63,7 +63,10 @@ namespace BookShopBLL.Service
 
 		public  async Task<ShopVM> GetByIdAsync(Guid Id)
 		{
-			return await _context.Shops.ProjectTo<ShopVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			try
+			{
+				return await _context.Shops.ProjectTo<ShopVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			}catch(Exception e) { return null; }
 		}
 
 		public  async Task<bool> UpdateAsync(ShopVM item)

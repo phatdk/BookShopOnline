@@ -81,7 +81,11 @@ namespace BookShopBLL.Service
 
 		public async Task<Order_PromotionVM> GetByIdAsync(Guid IdOrder, Guid IdPromotion)
 		{
-			return await _context.Order_Promotions.ProjectTo<Order_PromotionVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id_Order == IdOrder && c.Id_Promotion == IdPromotion);
+			try
+			{
+				return await _context.Order_Promotions.ProjectTo<Order_PromotionVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id_Order == IdOrder && c.Id_Promotion == IdPromotion);
+			}
+			catch { return null; }
 		}
 
 		public async Task<bool> UpdateAsync(Order_PromotionVM item)

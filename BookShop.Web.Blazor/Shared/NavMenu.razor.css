@@ -63,3 +63,8 @@
 .fas {
     margin-inline-end: 15px;
 }
+
+.nav-custom{
+    max-height: 600px;
+    overflow: auto;
+}

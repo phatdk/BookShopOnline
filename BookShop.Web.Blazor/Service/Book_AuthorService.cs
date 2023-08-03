@@ -42,7 +42,7 @@ namespace BookShop.Web.Blazor.Service
 		{
 			if (idauthor == null)
 			{
-				var response = await _httpClient.DeleteAsync(_url + $"delete" + $"?idbook={idbook}");
+				var response = await _httpClient.DeleteAsync(_url + "delete" + $"?idbook={idbook}");
 				if(response != null) return true;
 				return false;
 			}

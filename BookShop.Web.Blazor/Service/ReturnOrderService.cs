@@ -14,7 +14,7 @@ namespace BookShop.Web.Blazor.Service
 
 		public async Task<List<ReturnOrderVM>?> GetAsync(Guid? idorder)
 		{
-			if (idorder == null) return await _httpClient.GetFromJsonAsync<List<ReturnOrderVM>>(_url + $"all");
+			if (idorder == null) return await _httpClient.GetFromJsonAsync<List<ReturnOrderVM>>(_url + "all");
 			return await _httpClient.GetFromJsonAsync<List<ReturnOrderVM>>(_url + $"all?idorder={idorder}");
 		}
 
@@ -25,7 +25,7 @@ namespace BookShop.Web.Blazor.Service
 
 		public async Task<bool> AddAsync(ReturnOrderVM item)
 		{
-			var response = await _httpClient.PostAsJsonAsync(_url + $"add", item);
+			var response = await _httpClient.PostAsJsonAsync(_url + "add", item);
 			if (response != null) return true;
 			return false;
 		}

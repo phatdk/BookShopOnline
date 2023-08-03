@@ -64,7 +64,10 @@ namespace BookShopBLL.Service
 
 		public async Task<ImageVM> GetByIdAsync(Guid Id)
 		{
-			return await _context.Images.ProjectTo<ImageVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			try
+			{
+				return await _context.Images.ProjectTo<ImageVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			}catch { return null; }
 		}
 
 		public async Task<bool> UpdateAsync(ImageVM item)

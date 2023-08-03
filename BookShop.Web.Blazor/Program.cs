@@ -27,7 +27,6 @@ builder.Services.AddScoped<AuthorService>();
 builder.Services.AddScoped<Book_AuthorService>();
 builder.Services.AddScoped<Book_PromotionService>();
 builder.Services.AddScoped<BookService>();
-builder.Services.AddScoped<BrandService>();
 builder.Services.AddScoped<CartService>();
 builder.Services.AddScoped<Collection_BookService>();
 builder.Services.AddScoped<CommentService>();

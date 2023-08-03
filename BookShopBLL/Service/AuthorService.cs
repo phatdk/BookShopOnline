@@ -31,9 +31,6 @@ namespace BookShopBLL.Service
 					Id = item.Id,
 					Name = item.Name,
 					Index = item.Index,
-					Gender = item.Gender,
-					Birth = item.Birth,
-					Address = item.Address,
 					CreatedDate = DateTime.Now,
 					Status = 1,
 				};
@@ -77,7 +74,10 @@ namespace BookShopBLL.Service
 
 		public async Task<AuthorVM> GetByIdAsync(Guid Id)
 		{
-			return await _context.Authors.ProjectTo<AuthorVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			try
+			{
+				return await _context.Authors.ProjectTo<AuthorVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+			}catch (Exception ex) { return null; }
 		}
 
 		public async Task<bool> UpdateAsync(AuthorVM item)
@@ -87,9 +87,6 @@ namespace BookShopBLL.Service
 				var obj = await _context.Authors.FindAsync(item.Id);
 				obj.Name = item.Name;
 				obj.Index = item.Index;
-				obj.Gender = item.Gender;
-				obj.Birth = item.Birth;
-				obj.Address = item.Address;
 				obj.Status = item.Status;
 				await Task.FromResult(_context.Authors.Update(obj).Entity);
 				await _context.SaveChangesAsync();

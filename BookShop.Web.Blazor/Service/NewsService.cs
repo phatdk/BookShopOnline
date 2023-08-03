@@ -14,7 +14,7 @@ namespace BookShop.Web.Blazor.Service
 
 		public async Task<List<NewsVM>?> GetAsync()
 		{
-			return await _httpClient.GetFromJsonAsync<List<NewsVM>>(_url + $"all");
+			return await _httpClient.GetFromJsonAsync<List<NewsVM>>(_url + "all");
 		}
 
 		public async Task<NewsVM?> GetByIdAsync(Guid id)
@@ -24,7 +24,7 @@ namespace BookShop.Web.Blazor.Service
 
 		public async Task<bool> AddAsync(NewsVM item)
 		{
-			var response = await _httpClient.PostAsJsonAsync(_url + $"add", item);
+			var response = await _httpClient.PostAsJsonAsync(_url + "add", item);
 			if (response != null) return true;
 			return false;
 		}

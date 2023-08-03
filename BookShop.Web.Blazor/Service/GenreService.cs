@@ -14,7 +14,7 @@ namespace BookShop.Web.Blazor.Service
 
 		public async Task<List<GenreVM>?> GetAsync(string? name)
 		{
-			if (name == null) return await _httpClient.GetFromJsonAsync<List<GenreVM>>(_url + $"all");
+			if (name == null) return await _httpClient.GetFromJsonAsync<List<GenreVM>>(_url + "all");
 			return await _httpClient.GetFromJsonAsync<List<GenreVM>>(_url + $"all?name={name}");
 		}
 
@@ -31,7 +31,7 @@ namespace BookShop.Web.Blazor.Service
 
 		public async Task<bool> AddAsync(GenreVM item)
 		{
-			var response = await _httpClient.PostAsJsonAsync(_url + $"add", item);
+			var response = await _httpClient.PostAsJsonAsync(_url + "add", item);
 			if (response != null) return true;
 			return false;
 		}

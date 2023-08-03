@@ -14,11 +14,10 @@ namespace BookShopBLL.AutoMapper
         public ProjectMapper()
         {
             CreateMap<Admin, AdminVM>().ReverseMap();
-            CreateMap<Author, Author>().ReverseMap();
+            CreateMap<Author, AuthorVM>().ReverseMap();
             CreateMap<Book, BookVM>().ReverseMap();
             CreateMap<Book_Author, Book_AuthorVM>().ReverseMap();
             CreateMap<Book_Promotion,Book_PromotionVM>().ReverseMap();
-            CreateMap<Brand, BrandVM>().ReverseMap();
             CreateMap<Cart, CartVM>().ReverseMap();
             CreateMap<Collection_Book, Collection_BookVM>().ReverseMap();
             CreateMap<Comment, CommentVM>().ReverseMap();

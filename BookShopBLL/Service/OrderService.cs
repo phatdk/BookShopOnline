@@ -86,11 +86,15 @@ namespace BookShopBLL.Service
 
 		public async Task<OrderVM> GetByIdAsync(Guid? Id, string? code)
 		{
-			if (Id != null)
+			try
 			{
-				return await _context.Orders.ProjectTo<OrderVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+				if (Id != null)
+				{
+					return await _context.Orders.ProjectTo<OrderVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id == Id);
+				}
+				return await _context.Orders.ProjectTo<OrderVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Code.ToLower().Equals(code.ToLower()));
 			}
-			return await _context.Orders.ProjectTo<OrderVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Code.ToLower().Equals(code.ToLower()));
+			catch { return null; }
 		}
 
 		public async Task<bool> UpdateAsync(OrderVM item)

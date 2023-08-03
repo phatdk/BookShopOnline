@@ -1,0 +1,72 @@
+﻿@page "/publisher/manager"
+@attribute [Authorize(Roles = "Admin")]
+<h3>PublisherManager</h3>
+
+<div class="row">
+
+	<div class="border col-7">
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Name</th>
+					<th scope="col">Status</th>
+					<th scope="col">Index</th>
+				</tr>
+			</thead>
+			@if (publisherVMs != null)
+			{
+				<tbody>
+					@{
+						int index = 0;
+					}
+					@foreach (var item in publisherVMs)
+					{
+						index++;
+						<tr>
+							<th scope="row" rowspan="2">@index</th>
+							<td>@item.Name</td>
+							<td>@item.Status</td>
+							<td class="position-relative">
+								<div class="btn-group w-75" role="group" aria-label="Basic outlined example">
+									<button type="button" class="btn btn-sm btn-outline-dark m-1" @onclick="@(() => IndexDown(item.Id))"><i class="fa-solid fa-caret-left"></i></button>
+									<input class="btn w-25" value="@item.Index" @onchange="@((e)=>UpdateIndex(item.Id, e.Value))" />
+									<button type="button" class="btn btn-sm btn-outline-dark m-1" @onclick="@(() => IndexUp(item.Id))"><i class="fa-solid fa-caret-right"></i></button>
+								</div>
+								<button class="position-absolute end-0" @onclick="@(() => View(item.Id))">View</button>
+							</td>
+						</tr>
+						<tr>
+						</tr>
+					}
+				</tbody>
+			}
+		</table>
+	</div>
+	<div class="col-5" hidden="@isHide">
+		@if (publisherVM != null)
+		{
+			<EditForm Model="publisherVM">
+				<DataAnnotationsValidator />
+				<div class="form-group border m-0 p-2 row">
+					<label for="Name" class="form-label">Tên</label>
+					<InputText id="Name" class="form-control" placeholder="Tên" @bind-Value="publisherVM.Name" />
+					<ValidationMessage For="@(()=>publisherVM.Name)" />
+
+					<label for="Index" class="form-label">Index</label>
+					<InputNumber id="Index" class="form-control" placeholder="999" @bind-Value="publisherVM.Index" />
+
+					<label for="Status" class="form-label">
+						Trạng thái
+						<InputCheckbox id="Status" @bind-Value="isChecked" />
+					</label>
+				</div>
+			</EditForm>
+
+			<div class="btn-group btn-custom">
+				<button type="submit" class="btn btn-outline-warning w-50" @onclick="UpdateAuthor">Cập nhật</button>
+				<button type="submit" class="btn btn-outline-danger w-50" @onclick="DisableAuthor">Vô hiệu</button>
+			</div>
+		}
+	</div>
+</div>

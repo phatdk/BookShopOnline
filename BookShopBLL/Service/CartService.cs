@@ -67,7 +67,11 @@ namespace BookShopBLL.Service
 
 		public async Task<CartVM> GetByIdAsync(Guid IdCustomer, Guid IdBook)
 		{
-			return await _context.Carts.ProjectTo<CartVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id_Customer == IdCustomer && c.Id_Book == IdBook);
+			try
+			{
+				return await _context.Carts.ProjectTo<CartVM>(_mapper.ConfigurationProvider).FirstAsync(c => c.Id_Customer == IdCustomer && c.Id_Book == IdBook);
+			}
+			catch { return null; }
 		}
 
 		public async Task<List<CartVM>> GetListByIdAsync(Guid? IdCustomer, Guid? IdBook)
